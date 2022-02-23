@@ -1,0 +1,72 @@
+.center_{
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+.left_{
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 200px;
+  height: 100%;
+  color: black;
+  text-shadow: 1px 1px 3px white;
+  box-shadow: 0 0 3px black;
+  border-right: 1px solid black;
+  background-color: rgba(220, 141, 0, .3);
+}.left_ > h2{
+  text-align: center;
+  line-height: 80px;
+  font-size: 28px;
+  margin: 0;
+}.left_ > .list{
+  height: calc(100% - 80px);
+  overflow: auto;
+  display: flex;
+  flex-direction: column;
+}.left_ > .list > span:first-child{
+  border-top: 1px solid black;
+}.left_ > .list > span{
+  line-height: 50px;
+  width: 100%;
+  text-align: center;
+  font-size: 25px;
+  cursor: pointer;
+  transition: all .2s;
+  border-bottom: 1px solid black;
+}.left_ > .list > span:hover,.left_ > .list > span:active{
+  background-color: rgba(0, 0, 0, .3);
+}.left_ > .list > span.active{
+  color: white;
+  background-color: rgba(0, 0, 0, .7);
+}.right_{
+  position: absolute;
+  top: 0;
+  left: 200px;
+  height: 100%;
+  width: calc(100% - 200px);
+  overflow: hidden;
+}
+
+.button_{
+  position: absolute;
+  right: 50px;
+  bottom: 30px;
+  background-color: rgba(0, 160, 233, .7);
+  color: white;
+  line-height: 40px;
+  font-size: 30px;
+  padding: 10px 40px;
+  cursor: pointer;
+  transition: all .2s;
+  border-radius: 30px;
+}.button_:hover,.button_:active{
+  opacity: .5;
+}.button_.disabled{
+  background-color: gray;
+  cursor: default;
+}.button_:hover.disabled,.button_:active.disabled{
+  opacity: 1;
+}
+

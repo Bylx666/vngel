@@ -1,0 +1,91 @@
+<div class="left_">
+  <h2>{{ open }}</h2>
+  <div class="list"></div>
+</div>
+<div class="right_">
+  <div class="center_">
+    <h1 class="title">Title</h1>
+    <div class="photoFrame">
+      <img src="asset/img/project/preview.jpg" alt="preview">
+      <div class="photoShadow"></div>
+      <div class="time">
+        <span>
+          {{ last_modification }}:
+          <span class="lastModification">ddd</span>
+        </span>
+        <span>
+          {{ creation_time }}:
+          <span class="creationTime">b</span>
+        </span>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="button_" onclick="jump('project/newProj')">{{ create }}</div>
+<script>
+  const aLoad = new WindowLoad()
+  get('api/project/list', (result)=>{
+    aLoad.end(null)
+    const list = JSON.parse(result)
+    list.forEach((obj)=>{
+      const aDom = document.createElement('span')
+      aDom.textContent = obj.name
+      aDom.onclick = ()=>{
+        _getId('title').textContent = obj.name
+        _getId('lastModification').textContent = 
+          new Date(obj.last_modification).toLocaleString()
+        _getId('creationTime').textContent = 
+          new Date(obj.creation_time).toLocaleString()
+
+        // active button style
+        Array.from(
+          _getId('list').children,
+          (el)=>{
+            el.classList.remove('active')
+          }
+        )
+        aDom.classList.add('active')
+      }
+      _getId('list').append(aDom)
+    })
+  })
+  
+</script>
+<style>
+  .photoFrame{
+    padding: 20px;
+    background-color: white;
+    color: black;
+    box-shadow: 1px 1px 3px black;
+    cursor: pointer;
+    transition: all .2s;
+    position: relative;
+  }.photoFrame:hover,.photoFrame:active{
+    transform: rotate(5deg);
+    opacity: .5;
+  }.photoFrame > img{
+    height: 250px;
+    width: 500px;
+  }
+  .photoShadow{
+    position: absolute;
+    z-index: 1;
+    top: 20px;
+    left: 20px;
+    height: 250px;
+    width: 500px;
+    box-shadow: 1px 1px 3px black inset;
+  }
+  .time{
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+  }.time > span{
+    margin: 5px;
+  }.lastModification{
+    color: rgb(220, 141, 0);
+  }.creationTime{
+    color: rgb(0, 160, 233);
+  }
+</style>
+

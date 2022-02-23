@@ -1,0 +1,243 @@
+<!DOCTYPE html>
+<html lang="{{ Lang }}">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>{{ title }}</title>
+  <link rel="stylesheet" href="./asset/t.css">
+  <style id="activeStyle_"></style>
+</head>
+<body>
+  <div id="nav_">
+    <h2>{{ get_start }}</h2>
+    <div id="nav_sideBar_">
+      <img src="./asset/img/home/collapse.svg" alt="collapse">
+    </div>
+    <div id="navList_">
+      <div onclick="jump('home/i')" id="nav_home_">
+        <img src="./asset/img/home/home.svg" alt="home"/>
+        <span>{{ home }}</span>
+      </div>
+      <div onclick="jump('project/i')" id="nav_project_">
+        <img src="./asset/img/home/project.svg" alt="project"/>
+        <span>{{ project }}</span>
+      </div>
+    </div>
+  </div>
+  <div id="content_">
+    <div id="header_">
+      <div class="back">
+        <img src="asset/img/home/back.svg" alt="back">
+        <span>back</span>
+      </div>
+    </div>
+  </div>
+  <div id="popup_">
+    <div class="loading center_" style="
+      transform: translate(-50%, -50%) rotate(0deg);
+    ">😅</div>
+    <div class="message center_">
+      <img src="asset/img/home/close.svg" alt="close">
+      <span>eee</span>
+    </div>
+  </div>
+  <div style="z-index: -1;position: absolute;
+  top: 0;left: 0;margin: 0;
+  height: 100%;width: 100%;
+  background: url('asset/img/project/psc.jpg')
+   no-repeat center;
+  background-size: cover;"></div>
+  <script src="./asset/t.js"></script>
+  <script>
+(function(){
+  
+  jump('project/i')
+  const navSBDom = document.getElementById('nav_sideBar_')
+  const navSBDomOnClick = ()=>{
+    document.getElementById('nav_').classList.add('collapsed')
+    document.getElementById('content_').classList.add('expanded')
+    navSBDom.onclick = ()=>{
+      document.getElementById('nav_').classList.remove('collapsed')
+      document.getElementById('content_').classList.remove('expanded')
+      navSBDom.onclick = navSBDomOnClick
+    }
+  }
+  navSBDom.onclick = navSBDomOnClick
+
+  Array.from(
+    document.getElementById('navList_').children,(el)=>{
+      el.addEventListener('click', ()=>{
+        Array.from(
+          document.getElementById('navList_').children, (subel)=>{
+            subel.classList.remove('focused')
+          }
+        )
+        el.classList.add('focused')
+      })
+    }
+  )
+
+  document.getElementById('popup_').getElementsByTagName('img')[0]
+    .onclick = ()=>{
+      document.getElementById('popup_').style.display = 'none'
+    }
+})()
+
+  </script>
+  <style>
+body{
+  font-family:-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, 
+    Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+}::selection{
+  background-color: rgba(0, 0, 0, .2);
+}
+#nav_{
+  z-index: 1;
+  position: fixed;
+  left: 0;
+  top: 0;
+  width: 200px;
+  height: 100%;
+  background-color: rgb(233, 81, 147);
+  color: white;
+  display: flex;
+  flex-direction: column;
+  transition: left 0.5s;
+}#nav_ > h2{
+  text-align: center;
+  font-size: 28px;
+  margin: 20px;
+}#nav_sideBar_{
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: 5px;
+  border-radius: 5px 0 0 5px;
+  height: 100%;
+  background-color: rgb(220, 141, 0);
+  opacity: .5;
+  transition: opacity .1s;
+  cursor: pointer;
+}#nav_sideBar_:hover{
+  opacity: .7;
+}#nav_sideBar_:active{
+  opacity: .8;
+}#nav_sideBar_ > img{
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  right: 0;
+  width: 30px;
+  height: 30px;
+  background-color: inherit;
+  padding: 30px 5px;
+  border-radius: 10px 0 0 10px;
+}#navList_{
+  display: flex;
+  flex-direction: column;
+}#navList_ > div:first-child{
+  border-top: 1px solid white;
+}#navList_ > div{
+  width: 100%;
+  height: 50px;
+  border-bottom: 1px solid white;
+  overflow: hidden;
+  display: flex;
+  cursor: pointer;
+  transition: all .2s;
+}#navList_ > div:hover{
+  background-color: rgba(253, 253, 253, 0.5);
+}#navList_ > div > span{
+  position: absolute;
+  left: 50px;
+  font-size: 25px;
+  line-height: 50px;
+  transition: inherit;
+}#navList_ > div > img{
+  margin: 10px;
+  width: 30px;
+  height: 30px;
+  transition: inherit;
+}
+#navList_ > div.focused{
+  height: 64px;
+  
+}#navList_ > div.focused > img{
+  opacity: .5;
+  height: 80px;
+  width: 80px;
+}#navList_ > div.focused > span{
+  left: 10px;
+  line-height: 64px;
+  font-size: 40px;
+}
+#nav_.collapsed{
+  left: -195px;
+}#nav_.collapsed > #nav_sideBar_ > img{
+  left: 0;
+  transform: translateY(-50%) rotateY(180deg);
+}
+#content_{
+  position: absolute;
+  left: 200px;
+  top: 0;
+  width: calc(100% - 200px);
+  height: 100%;
+  transition: left 0.5s, width 0.5s;
+  color: white;
+}#content_.expanded{
+  left: 5px;
+  width: calc(100% - 5px);
+}
+#header_{
+  position: fixed;
+  width: 100%;
+  height: 60px;
+  background-color: rgba(0, 160, 233, .7);
+}#header_ > .back{
+  position: absolute;
+  left: 0;
+  top: 0;
+  cursor: pointer;
+}#header_ > .back > img{
+  margin: 10px;
+  width: 40px;
+  height: 40px;
+}#header_ > .back > span{
+  position: absolute;
+  color: white;
+  margin: 10px 0;
+  left: 50px;
+  line-height: 40px;
+  font-size: 24px;
+}
+#popup_{
+  display: none;
+  z-index: 2;
+  position: fixed;
+  left: 0;top: 0;
+  width: 100%;height: 100%;
+  background-color: rgba(253, 253, 253, 0.3);
+}#popup_ > .loading{
+  font-size: 50px;
+  transition: transform 1s linear;
+}#popup_ > .message{
+  max-height: calc(100% - 60px);
+  max-width: calc(100% - 100px);
+  padding: 30px 50px;
+  background-color: white;
+  box-shadow: 0 0 3px black;
+}#popup_ > .message > span{
+  font-size: 30px;
+}#popup_ > .message > img{
+  position: absolute;
+  width: 30px;
+  height: 30px;
+  right: 0;
+  top: 0;
+  cursor: pointer;
+}
+  </style>
+</body>
+</html>

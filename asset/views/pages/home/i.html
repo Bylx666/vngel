@@ -1,0 +1,54 @@
+<div class="center_">
+  <h1>{{ welcome }}</h1>
+  <div id="flex">
+    <div onclick="jump('project/newProj')">
+      <img src="./asset/img/home/new.svg" alt="file">
+      <span class="title">{{ create_proj }}</span>
+      <span class="subtitle">{{ create_proj_desc }}</span>
+    </div>
+    <div>
+      <img src="./asset/img/home/open.svg" alt="file">
+      <span class="title">{{ open_proj }}</span>
+      <span class="subtitle">{{ open_proj_desc }}</span>
+    </div>
+    <div></div>
+    <div></div>
+  </div>
+</div>
+
+<style>
+  h1{
+    text-align: center;
+  }
+  #flex{
+    display: flex;
+    flex-wrap: wrap;
+    width: 650px;
+  }#flex > div{
+    position: relative;
+    height: 80px;
+    width: 300px;
+    border: 2px solid rgba(255, 255, 255, .7);
+    border-radius: 20px;
+    margin: 5px 10px;
+    cursor: pointer;
+  }#flex > div:hover{
+    opacity: .7;
+  }#flex > div:active{
+    opacity: .5;
+  }#flex > div > img{
+    margin: 10px;
+    width: 60px;
+    height: 60px;
+  }#flex > div > .title{
+    position: absolute;
+    line-height: 50px;
+    font-size: 24px;
+    font-weight: bold;
+
+  }#flex > div > .subtitle{
+    position: absolute;
+    top: 45px;
+    color: rgba(255, 255, 255, .7);
+  }
+</style>

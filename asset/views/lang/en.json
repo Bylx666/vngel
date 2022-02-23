@@ -1,0 +1,38 @@
+{
+  "home": {
+    "title": "Vngel",
+    "get_start": "Get Started",
+    "home": "Home",
+    "project": "Project"
+  },
+  "404": {
+    "not_found": "Not Found",
+    "content": "Where are you now?"
+  },
+  "pages": {
+    "home": {
+      "i": {
+        "welcome": "Welcome!",
+        "create_proj": "New",
+        "create_proj_desc": "Create a new project",
+        "open_proj": "Open",
+        "open_proj_desc": "Open an existing project"
+      }
+    },
+    "project": {
+      "i": {
+        "open": "Open",
+        "create": "Create a new Project",
+        "last_modification": "Last modification",
+        "creation_time": "Creation time"
+      },
+      "newProj": {
+        "create_a_new_project": "Create a new project",
+        "type_a_word": "Type a word",
+        "available_name": "Available",
+        "already_titled": "Already titled",
+        "submit": "Submit"
+      }
+    }
+  }
+}

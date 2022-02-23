@@ -1,0 +1,54 @@
+<div class="center_">
+  <h1>{{ create_a_new_project }}</h1>
+  <input class="input" type="text" placeholder="untitled">
+  <p class="status">{{ type_a_word }}</p>
+</div>
+<div class="button_ disabled">{{ submit }}</div>
+<style>
+  *{
+    text-align: center;
+  }
+  .input{
+    padding: 0;
+    width: 300px;
+    height: 40px;
+    outline: none;
+    border: 2px solid gray;
+    opacity: .7;
+    border-radius: 20px;
+  }.input:focus{
+    border: 2px solid rgba(0, 160, 233, .7);
+    opacity: 1;
+  }
+  .status{
+    color: rgba(0, 160, 233, .7);
+    text-shadow: 1px 1px 3px white;
+    transition: color .2s;
+  }
+</style>
+<script>
+const inputDom = _getId('input')
+const statusDom = _getId('status')
+const submitDom = _getId('button_')
+inputDom.oninput = ()=>{
+  let getUrl = inputDom.value || 'untitled'
+  get(`api/project/checkName/${getUrl}`, (result)=>{
+    if(result==='true') {
+      statusDom.textContent = '{{ available_name }}'
+      statusDom.style.color = 'rgb(233, 81, 147)'
+      submitDom.classList.remove('disabled')
+      submitDom.onclick = ()=>{
+        const loading = new WindowLoad()
+        get(`./api/project/create/${getUrl}`, (status)=>{
+          loading.end(status)
+        })
+      }
+    }else {
+      statusDom.textContent = '{{ already_titled }}'
+      statusDom.style.color = 'rgb(220, 141, 0)'
+      submitDom.classList.add('disabled')
+      submitDom.onclick = null
+    }
+  })
+}
+</script>
